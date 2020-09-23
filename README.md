@@ -12,3 +12,7 @@ This is a training repo to learn about new hooks feature of React and creating a
 - Decoupled state logic (Actions)
 - Testable components
 - Custom Hooks for **persisting state**.
+
+## Demo 
+![Image 1](docs/images/image1.jpg?raw=true "Image1")
+![Image 2](docs/images/image2.jpg?raw=true "Image2")
