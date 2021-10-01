@@ -1,12 +1,24 @@
 import React from "react";
+import { useStore } from "../context";
 import { TodoHeader } from "./TodoHeader";
 
-const TodoList = () =>{
+const TodoList = () => {
+  const {
+    dispatch,
+    state: { todos }
+  } = useStore();
 
   let header = (
     <TodoHeader>
       <span className="float-right">There are .... todos.</span>
-    </TodoHeader>);
+    </TodoHeader>
+  );
+  const handleCompleteClicked = (todo) => {
+    dispatch({
+      type: "COMPLETE",
+      payload: todo
+    });
+  };
   return (
     <div className="row">
       <div className="col-md-12">
@@ -19,14 +31,30 @@ const TodoList = () =>{
         <div className="row">
           <div className="col-md-12">
             <ul className="list-group">
-              {/* use please class for list element 'list-group-item' and data-testid="todo-element" */}
-              {/* use for complete button class `float-right btn btn-danger btn-sm` and data-testid="todo-element-button" */}
+              {todos.map((e, i) => {
+                return (
+                  <li
+                    key={`todo-list-item-${i}`}
+                    className="list-group-item"
+                    data-testid="todo-element"
+                  >
+                    {e}
+                    <button
+                      onClick={() => handleCompleteClicked(e)}
+                      className="float-right btn btn-danger btn-sm"
+                      data-testid="todo-element-button"
+                    >
+                      Complete
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default TodoList
+export default TodoList;
